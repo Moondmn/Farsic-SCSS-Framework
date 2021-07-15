@@ -1,1 +1,2 @@
-<p style="display:flex; align-items: center; justify-contents:center>Not released yet</p>
+# Farsic
+**Note**: `This Framework is unstable right now, so don not use it until we release it officially`
