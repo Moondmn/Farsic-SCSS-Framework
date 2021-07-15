@@ -1,1 +1,1 @@
-<div style="display:flex; align-items: center; justify-contents:center>Not released yet</div>
+<p style="display:flex; align-items: center; justify-contents:center>Not released yet</p>
