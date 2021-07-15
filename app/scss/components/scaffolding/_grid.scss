@@ -1,0 +1,142 @@
+@use '../../setting' as *;
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:map';
+// grid makers 🎹
+//NOTE `d-grid` is required
+@mixin Grid-Cols-Factory($_prefix, $_number:12) {
+    @for $j from 1 to $_number+1 {
+        .#{$_prefix}grid-cols-#{$j}{
+            grid-template-columns: repeat(#{$j}, minmax(0, 1fr));
+        }
+    }
+    .#{$_prefix}grid-cols-none{
+        grid-template-columns: none;
+    }
+}
+
+@mixin Grid-Col-Span-Start-End-Factory($_prefix, $_number:12) {
+    .#{$_prefix}col-auto{
+        grid-column: auto;
+    }
+    @for $j from 1 to $_number+1 {
+        .#{$_prefix}col-span-#{$j}{
+            grid-column: span #{$j} / span #{$j};
+        }
+    }
+
+    .#{$_prefix}col-span-full{
+        grid-column: 1 / -1;
+    }
+
+    @for $i from 1 to $_number+2 {
+        .#{$_prefix}col-start-#{$i}{
+            grid-column-start: #{$i};
+        }
+    }
+
+    .#{$_prefix}col-start-auto{
+        grid-column-start: auto;
+    }	
+
+    @for $e from 1 to $_number+2 {
+        .#{$_prefix}col-end-#{$e}{
+            grid-column-end: #{$e};
+        }
+    }
+
+    .#{$_prefix}col-end-auto{
+        grid-column-end: auto;
+    }	
+}
+
+@mixin Grid-Rows-Factory($_prefix, $_number:6){
+    @for $j from 1 to $_number+1 {
+        .#{$_prefix}grid-rows-#{$j}{
+            grid-template-rows: repeat(#{$j}, minmax(0, 1fr));
+        }
+    }
+    .#{$_prefix}grid-rows-none{
+        grid-template-rows: none;
+    }
+}
+
+@mixin Grid-Row-Span-Start-End-Factory($_prefix, $_number:6){
+    .#{$_prefix}row-auto{
+        grid-row: auto;
+    }
+    @for $j from 1 to $_number+1 {
+        .#{$_prefix}row-span-#{$j}{
+            grid-row: span #{$j} / span #{$j};
+        }
+    }
+
+    .#{$_prefix}row-span-full{
+        grid-row: 1 / -1;
+    }
+
+    @for $i from 1 to $_number+2 {
+        .#{$_prefix}row-start-#{$i}{
+            grid-row-start: #{$i};
+        }
+    }
+
+    .#{$_prefix}row-start-auto{
+        grid-row-start: auto;
+    }	
+
+    @for $e from 1 to $_number+2 {
+        .#{$_prefix}row-end-#{$e}{
+            grid-row-end: #{$e};
+        }
+    }
+
+    .#{$_prefix}row-end-auto{
+        grid-row-end: auto;
+    }
+}
+
+@mixin Grid-Auto-Flow-Factory($_prefix, $_unit){
+    @each $key,$value in $_unit{
+        .#{$_prefix}grid-#{$key}{
+            grid-auto-flow: #{$value};
+        }
+    }
+}
+
+@mixin Grid-Auto-Columns-Factory($_prefix, $_unit){
+    @each $key,$value in $_unit{
+        .#{$_prefix}grid-#{$key}{
+            grid-auto-columns: #{$value};
+        }
+    }
+}
+
+@mixin Grid-Auto-Rows-Factory($_prefix,$_unit){
+    @each $key,$value in $_unit{
+        .#{$_prefix}grid-#{$key}{
+            grid-auto-rows: #{$value};
+        }
+    }
+}
+
+@mixin Gap-Factory($_prefix,$_spacings, $_unit) {
+    @each $_spacing-k,$_spacing-v in $_spacings {
+        @for $j from 1 to length($_unit)+1 {
+            $current-unit: nth($_unit, $j);
+            @if $current-unit == 'all'{
+                .#{$_prefix}gap-#{$_spacing-k}{
+                    gap: #{$_spacing-v};
+                }
+            }@else if $current-unit == 'x'{
+                .#{$_prefix}gap-x-#{$_spacing-k}{
+                    column-gap: #{$_spacing-v};
+                }
+            }@else if $current-unit == 'y'{
+                .#{$_prefix}gap-y-#{$_spacing-k}{
+                    row-gap: #{$_spacing-v};
+                }
+            }
+        }
+    }
+}

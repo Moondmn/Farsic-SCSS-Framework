@@ -1,0 +1,198 @@
+@use '../../setting'as *;
+@use 'sass:math';
+
+// utilties makers
+//NOTE here we genrate: 
+//Spacings (padding, margin, space between)
+//Sizing (width, height + max and min)
+//Layout (display, positions, overflow, visibality, scroll behaivier, z-index, orders, top/botto/right/left, and more...)
+
+@mixin PadMargFactory($_prefix, $_spacing-pad:null, $_unit-pad:null, $_spacing-mrg:null, $_unit-mrg:null) {
+    @if $_spacing-pad==null or $_unit-pad==null {
+        @warn 'No padding is going to be excute in the css file';
+    }
+
+    @else {
+        .p-none {
+            padding: 0 !important;
+        }
+
+        @each $_spacing-k,
+        $_spacing-v in $_spacing-pad {
+
+            @each $_unit-k,
+            $_unit-v in $_unit-pad {
+                @if $_unit-v=='side'or $_unit-v=='x' {
+                    .#{$_prefix}p#{$_unit-k}-#{$_spacing-k} {
+                        padding-right: $_spacing-v;
+                        padding-left: $_spacing-v;
+                    }
+                }
+
+                @else if $_unit-v=='vert'or $_unit-v=='y' {
+                    .#{$_prefix}p#{$_unit-k}-#{$_spacing-k} {
+                        padding-top: $_spacing-v;
+                        padding-bottom: $_spacing-v;
+                    }
+                }
+
+                @else if $_unit-v=='' {
+                    .#{$_prefix}p-#{$_spacing-k} {
+                        padding: $_spacing-v;
+                    }
+                }
+
+                @else if $_unit-v !='' {
+                    .#{$_prefix}p#{$_unit-k}-#{$_spacing-k} {
+                        padding-#{$_unit-v}: $_spacing-v;
+                    }
+                }
+            }
+        }
+    }
+
+    @if $_spacing-mrg==null or $_unit-mrg==null {
+        @warn 'No Margin is going to be excute in the css file';
+    }
+
+    @else {
+        .m-none {
+            margin: 0 !important;
+        }
+
+        @each $_spacing-k,
+        $_spacing-v in $_spacing-mrg {
+
+            @each $_unit-k,
+            $_unit-v in $_unit-mrg {
+                @if $_unit-v=='side'or $_unit-v=='x' {
+                    .#{$_prefix}m#{$_unit-k}-#{$_spacing-k} {
+                        margin-right: $_spacing-v;
+                        margin-left: $_spacing-v;
+                    }
+                }
+
+                @else if $_unit-v=='vert'or $_unit-v=='y' {
+                    .#{$_prefix}m#{$_unit-k}-#{$_spacing-k} {
+                        margin-top:$_spacing-v;
+                        margin-bottom:$_spacing-v;
+                    }
+                }
+
+                @else if $_unit-v=='' {
+                    .#{$_prefix}m-#{$_spacing-k} {
+                        margin: $_spacing-v;
+                    }
+                }
+
+                @else if $_unit-v !='' {
+                    .#{$_prefix}m#{$_unit-k}-#{$_spacing-k} {
+                        margin-#{$_unit-v}: $_spacing-v;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin DisplayFactory($_prefix, $_unit) {
+
+    @each $_unit-k,
+    $_unit-v in $_unit {
+        .#{$_prefix}d-#{$_unit-k} {
+            display: #{$_unit-v} !important;
+        }
+    }
+}
+
+@mixin FlexFactory($_prefix, $_unit:null) {
+    @if $_unit==null {
+        @warn "No additional flex-*{ #, flex-direction=* } will excute in css file";
+    }
+
+    @else {
+
+        @each $_unit-k,
+        $_unit-v in $_unit {
+            .#{$_prefix}flex-#{$_unit-k} {
+                flex-direction: #{$_unit-v};
+            }
+        }
+    }
+}
+
+@mixin PositionFactory($_prefix, $_unit) {
+
+    @each $_unit-k,
+    $_unit-v in $_unit {
+        .#{$_prefix}pos-#{$_unit-k} {
+            position: #{$_unit-v} !important;
+        }
+    }
+}
+
+@mixin JustifyAlginFactory($_prefix, $_unit--contents, $_unit--items) {
+
+    @each $_unit-k,
+    $_unit-v in $_unit--contents {
+        .#{$_prefix}justify-contents-#{$_unit-k} {
+            justify-content: #{$_unit-v} !important;
+        }
+
+        .#{$_prefix}align-contents-#{$_unit-k} {
+            align-content: #{$_unit-v} !important;
+        }
+    }
+
+    @each $_unit-k,
+    $_unit-v in $_unit--items {
+        .#{$_prefix}justify-items-#{$_unit-k} {
+            justify-items: #{$_unit-v} !important;
+        }
+
+        .#{$_prefix}align-items-#{$_unit-k} {
+            align-items: #{$_unit-v} !important;
+        }
+    }
+}
+
+@mixin HeightWidthFactory ($_prefix, $_unit-width:null, $_unit-height:null) {
+    @if $_unit-width==null {
+        @warn "No additional .w-* is going to excute in finall css file";
+    }
+
+    @else {
+
+        @each $_unit-k,
+        $_unit-v in $_unit-width {
+            .#{$_prefix}w-#{$_unit-k} {
+                width: #{$_unit-v} !important;
+            }
+        }
+    }
+
+    @if $_unit-height==null {
+        @warn "No additional .h-* is going to excute in finall css file";
+    }
+
+    @else {
+
+        @each $_unit-k,
+        $_unit-v in $_unit-height {
+            .#{$_prefix}h-#{$_unit-k} {
+                height: #{$_unit-v} !important;
+            }
+        }
+    }
+
+}
+
+@mixin BorderRadFactory($_prefix,$_rounded){
+    @each $key,$value in $_rounded {
+        .#{$_prefix}border-#{$key}{
+            border-radius: #{$value};
+            border-left: 2;
+        }
+    }
+
+}

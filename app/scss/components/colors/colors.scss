@@ -1,0 +1,5 @@
+@use 'color-maker' as color;
+@use '../../setting' as *;
+
+// colors 🎨
+@include color.make-colors($def-colors);

@@ -1,0 +1,37 @@
+@use '../../setting' as *;
+@use 'sass:math';
+// row makeres 🎫
+@mixin RowFactory($_gutter-x: 1.5rem, $_gutter-y: 0) {
+    .row {
+        --#{$fs-prefix}gutter-x: #{$_gutter-x};
+        --#{$fs-prefix}gutter-y: #{$_gutter-y};
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(var(--#{$fs-prefix}gutter-y) * -1);
+        margin-right: calc(var(--#{$fs-prefix}gutter-x) * -0.5);
+        margin-left: calc(var(--#{$fs-prefix}gutter-x) * -0.5);
+    }
+
+    .row >* {
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 100%;
+        padding-right: calc(var(--#{$fs-prefix}gutter-x) * 0.5);
+        padding-left: calc(var(--#{$fs-prefix}gutter-x) * 0.5);
+        margin-top: var(--#{$fs-prefix}gutter-y);
+    }
+}
+
+@mixin Row-ColFactory($_prefix, $_count-rows: 6) {
+    @for $j from 1 to $_count-rows+1 {
+        .#{$_prefix}row-col-#{$j} > * {
+            flex: 0 0 auto;
+            width: percentage(math.div(1, $j));
+        }
+    }
+
+    .#{$_prefix}row-cols-auto {
+        flex: 0 0 auto;
+        width: auto;
+    }
+}

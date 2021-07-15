@@ -1,0 +1,19 @@
+/*
+additional styles that are going to add to farsic later
+*/
+:root {
+  --text-color: #212529;
+  --bg-color: #fff;
+}
+
+[theme=dark] {
+  --text-color: #fff;
+  --bg-color: #000;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+/*# sourceMappingURL=style.css.map */

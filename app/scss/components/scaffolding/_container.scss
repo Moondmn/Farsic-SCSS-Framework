@@ -1,0 +1,26 @@
+@use '../../setting' as *;
+@use 'sass:math';
+// container maker 🛂
+@mixin ContainerFactory($_container-with, $_container-media, $_gutter: 0.75rem) {
+
+    .container,
+    .container-fluid {
+        width: 100%;
+        padding-right: var(--#{$fs-prefix}gutter-x, #{$_gutter});
+        padding-left: var(--#{$fs-prefix}gutter-x, #{$_gutter});
+        margin-right: auto;
+        margin-left: auto;
+    }
+    @each $breakpoint,
+    $width in $_container-with {
+        $min: map-get($_container-media, $breakpoint);
+
+        @if if(0 !=$min, $min, null) {
+            @media (min-width: $min) {
+                .container {
+                    max-width: $width;
+                }
+            }
+        }
+    }
+}

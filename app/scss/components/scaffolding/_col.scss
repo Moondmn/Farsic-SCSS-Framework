@@ -1,0 +1,24 @@
+@use '../../setting' as *;
+@use 'sass:math';
+// col makers 🎢
+@mixin ColFactory($_prefix, $_colCount) {
+    .col-auto {
+        flex: 0 0 auto;
+        width: auto;
+    }
+
+    .#{$_prefix}col {
+        // margin: 0;
+        flex: 1 0 0%;
+        // clear: none;
+        // float: left; //we don't need it anymore
+    }
+
+    @for $i from 1 through $_colCount {
+        .#{$_prefix}col-#{$i} {
+            // @extend .#{$_prefix}col;
+            flex: 0 0 auto;
+            width: percentage(math.div($i, $_colCount));
+        }
+    }   
+} 

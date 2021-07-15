@@ -1,0 +1,24 @@
+@use "../../setting" as *;
+
+.avatar {
+  position: relative;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  overflow: hidden;
+
+  /* Draw text on image just like in Gmail */
+  &::before {
+    content: attr(data-text);
+    color: #fff;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
+  img.padded {
+    padding: 0.5rem;
+    width: 100%;
+  }
+}

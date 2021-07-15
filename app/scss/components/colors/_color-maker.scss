@@ -1,0 +1,35 @@
+@use '../../setting' as *;
+@mixin make-colors ($_colorList) {
+
+    @each $color-name,$color-value in $_colorList {
+        @each $code,$color in $color-value {
+
+            .text-#{$color-name}-#{$code} {
+                --#{$fs-prefix}#{$color-name}-#{$code}: #{$color};
+                color: var(--#{$fs-prefix}#{$color-name}-#{$code});
+            }
+            .hover\:text-#{$color-name}-#{$code}:hover {
+                --#{$fs-prefix}#{$color-name}-#{$code}: #{$color};
+                color: var(--#{$fs-prefix}#{$color-name}-#{$code});
+            }
+
+            .bg-#{$color-name}-#{$code} {
+                --#{$fs-prefix}#{$color-name}-#{$code}: #{$color};
+                background-color: var(--#{$fs-prefix}#{$color-name}-#{$code});
+            }
+            .hover\:bg-#{$color-name}-#{$code}:hover {
+                --#{$fs-prefix}#{$color-name}-#{$code}: #{$color};
+                background-color: var(--#{$fs-prefix}#{$color-name}-#{$code});
+            }
+            
+            .border-#{$color-name}-#{$code} {
+                --#{$fs-prefix}#{$color-name}-#{$code}: #{$color};
+                border-color: var(--#{$fs-prefix}#{$color-name}-#{$code});
+            }
+            .hover\:border-#{$color-name}-#{$code}:hover {
+                --#{$fs-prefix}#{$color-name}-#{$code}: #{$color};
+                border-color: var(--#{$fs-prefix}#{$color-name}-#{$code});
+            }
+        }
+    }
+}

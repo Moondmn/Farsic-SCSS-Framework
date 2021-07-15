@@ -1,0 +1,55 @@
+/*
+additional styles that are going to add to farsic later
+*/
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "sass:string";
+@function cvr($_name-color: null){
+    @return var(--#{$_name-color});
+}
+@function map-deep-get($map, $keys...) {
+    $scope: $map;
+    $i: 1;
+
+    @while (meta.type-of($scope)==map) and ($i <=list.length($keys)) {
+        $scope: map.get($scope, list.nth($keys, $i));
+        $i: $i + 1;
+    }
+
+    @return $scope;
+}
+
+
+$theme-default-colors:(
+    'default':(
+        'text-color': #212529,
+        'bg-color': #fff,
+    ),
+    'dark':(
+        'text-color': #fff,
+        'bg-color': #000,
+    ),
+);
+
+@each $k,$v in $theme-default-colors {
+    @if $k == 'default'{
+        :root{
+            @each $_k,$_v in $v{
+                --#{$_k}: #{$_v};
+            }
+        }
+    }@else{
+        [theme="#{$k}"]{
+            @each $_k,$_v in $v{
+                --#{$_k}: #{$_v};
+            }
+        }
+    }
+}
+
+body{
+    color: cvr('text-color');
+    background-color: cvr('bg-color');
+}

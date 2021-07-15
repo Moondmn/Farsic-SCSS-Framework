@@ -1,0 +1,14 @@
+@mixin font-family($_font){
+    @each $font-name,$font-url in $_font {
+        .font-#{$font-name}{
+            font-family: #{$font-url};
+        }
+    }
+}
+@mixin font-size($_size){
+    @each $name,$size in $_size {
+        .font-#{$name}{
+            font-size: #{$size};
+        }
+    }
+}

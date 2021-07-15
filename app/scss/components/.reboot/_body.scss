@@ -1,0 +1,15 @@
+@use '../../setting' as *;
+
+
+//
+body{
+    margin: 0; // 1
+    font-family: $body-default-font;
+    font-size: $body-default-font-size;
+    font-weight: $body-default-font-weight;
+    line-height: $body-default-line-height;
+    color: $body-default-body-color;
+    background-color: $body-default-body-bg; // 2
+    -webkit-text-size-adjust: 100%; // 3
+    -webkit-tap-highlight-color: rgba($black, 0); // 4
+}

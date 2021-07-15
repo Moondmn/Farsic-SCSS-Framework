@@ -1,0 +1,6 @@
+@use 'font' as font;
+@use '../../setting' as *;
+
+// typography 📝
+@include font.font-family($def-font-familys);
+@include font.font-size($def-font-size);

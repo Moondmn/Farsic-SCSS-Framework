@@ -1,0 +1,39 @@
+///settings 🌠
+@use '../setting' as *;
+// we don't need it rn
+
+
+/// body and root 📐
+@use '.reboot' as * ;
+
+
+/// alarts ⏰
+@use "alerts";
+
+/// avatars 👤
+@use "avatar";
+
+//badge 📛
+@use "badge";
+
+///buttons 🔽
+@use "buttons";
+
+///colors 🎨
+@use "colors";
+
+
+///dropdown 💧
+@use "dropdown";
+
+///forms 📩
+@use "forms";
+
+//scaffolding 🏦
+@use "scaffolding";
+
+///theme 🎭
+@use "theme";
+
+///typography 📝
+@use "typography";

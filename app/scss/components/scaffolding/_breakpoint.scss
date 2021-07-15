@@ -1,0 +1,16 @@
+@use '../../setting'as *;
+@use 'sass:math';
+
+@mixin BreakPointGenerator($_numberOfBreackpoints: $def-columns-breakpoints) {
+    $prefixList: map-keys($_numberOfBreackpoints);
+    $breakpointNumber: map-values($_numberOfBreackpoints);
+
+    @for $i from 1 through length($prefixList) {
+        $global-prefix: nth($prefixList, $i) !global;
+        $breakpoint_min: nth($breakpointNumber, $i);
+
+        @media (min-width: $breakpoint_min) {
+            @content;
+        }
+    }
+}
